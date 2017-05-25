@@ -1,0 +1,104 @@
+题目描述
+数据表记录包含表索引和数值，请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照key值升序进行输出。
+
+输入描述:
+先输入键值对的个数
+然后输入成对的index和value值，以空格隔开
+
+输出描述:
+输出合并后的键值对（多行）
+
+输入例子:
+4
+0 1
+0 2
+1 2
+3 4
+
+输出例子:
+0 3
+1 2
+3 4
+
+很方便的map但是不太会用，还需要多学习
+自动排序，本来就是唯一的索引
+链接：https://www.nowcoder.com/questionTerminal/de044e89123f4a7482bd2b214a685201
+来源：牛客网
+//C++ //C++，用stl中的map
+#include<iostream>
+#include<map>
+using namespace std;
+ 
+int main()
+{
+    int n;
+    while(cin >> n){
+        map<int,int> m;
+        while(n--){
+            int key,value;
+            cin >> key >> value;
+            if(!m[key]){
+                m[key] = value;
+            }
+            else m[key] += value;//不存在时赋值，存在时累加
+        }
+        //map内部本身就是按照key的大小顺序进行存储的 
+        for(map<int,int>::iterator it=m.begin();it!=m.end();++it){
+            cout << it->first << " "<< it->second << endl;
+        }
+    }
+    return 0;
+}
+
+解法二：
+常规解法，用结构体来储存
+
+链接：https://www.nowcoder.com/questionTerminal/de044e89123f4a7482bd2b214a685201
+来源：牛客网
+#include<iostream>
+using namespace std;
+struct Key_Value_Pair
+{
+    int index;
+    int value;
+};
+int main()
+{
+    Key_Value_Pair Part[1000];
+    int Key_Value_Pairs_Num,i,j,k;
+    cin>>Key_Value_Pairs_Num;
+    for(i=0;i<Key_Value_Pairs_Num;i++)
+        cin>>Part[i].index>>Part[i].value;
+    for(i=0;i<Key_Value_Pairs_Num;i++)
+    {
+        for(j=i+1;j<Key_Value_Pairs_Num;j++)
+        {
+            if(Part[i].index==Part[j].index)
+            {
+                Part[i].value+=Part[j].value;//对第二键值求和，累加在第一次出现的键值项上，下一步进行重复索引的删除操作
+                for(k=j;k<Key_Value_Pairs_Num-1;k++)
+                    Part[k]=Part[k+1];
+                j--;
+                Key_Value_Pairs_Num--;
+            }
+        }
+    }
+    //下面进行排序操作
+    Key_Value_Pair Temp;//定义一个结构体，作为交换操作的中间值
+    for(i=0;i<Key_Value_Pairs_Num-1;i++)
+    {
+        for(j=0;j<Key_Value_Pairs_Num-1-i;j++)
+        {
+            if(Part[j].index>Part[j+1].index)
+            {
+                Temp=Part[j];
+                Part[j]=Part[j+1];
+                Part[j+1]=Temp;
+            }
+        }
+    }
+    for(i=0;i<Key_Value_Pairs_Num;i++)
+        cout<<Part[i].index<<" "<<Part[i].value<<endl;
+    return 0;
+}
+
