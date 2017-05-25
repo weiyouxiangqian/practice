@@ -1,0 +1,66 @@
+题目描述
+写出一个程序，接受一个十六进制的数值字符串，输出该数值的十进制字符串。（多组同时输入 ）
+
+输入描述:
+输入一个十六进制的数值字符串。
+
+输出描述:
+输出该数值的十进制字符串。
+
+输入例子:
+0xA
+
+输出例子:
+10
+
+方法一：
+//很经典的字符串转换算法，相同的十进制字符串转整数算法为
+//int num=0;
+//num=num*10+str[i]-‘0’;
+//同样，十六进制算法基本不变，但是要分情况讨论，注意字符大小写，以及字符的转换和数字转换的不同，下面的程序没有判断小写字符。
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    string s;
+    while(cin>>s){
+        int length = s.size();
+        if(length  <= 2)
+            continue;
+        if(s[0]!='0' || s[1]!='x')
+            continue;
+        
+        int res =0;
+        int flag =1;
+        for(int i=2;i<length;i++){
+            //char cur = s[i];
+            if(s[i]>='A'&&s[i]<='F'){
+                res=(s[i]-'A'+10)+res*16;
+            }
+            else if(s[i]>='0' && s[i]<='9'){
+                res=(s[i]-'0')+res*16;
+            }
+            else
+                continue;
+            //flag*=16;
+        }     
+        cout<<res<<endl;     
+    } 
+    return 0;
+}
+
+解法二：
+
+链接：https://www.nowcoder.com/questionTerminal/8f3df50d2b9043208c5eed283d1d4da6
+来源：牛客网
+注意 这里用c的函数scanf和printf中的%x，和%d就不行，最多只能处理到0xffff，再大就溢出了，这也是本题用字符串作为输入的原因，就是要考察大数的转换。
+#include <iostream> 
+using namespace std;
+
+int main()
+{
+    int a;
+    while(cin>>hex>>a){
+    cout<<a<<endl;
+    }
+}
