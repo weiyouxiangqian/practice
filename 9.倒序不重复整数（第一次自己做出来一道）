@@ -1,0 +1,88 @@
+题目描述
+输入一个int型整数，按照从右向左的阅读顺序，返回一个不含重复数字的新的整数。
+
+输入描述:
+输入一个int型整数
+
+输出描述:
+按照从右向左的阅读顺序，返回一个不含重复数字的新的整数
+
+输入例子:
+9876673
+
+输出例子:
+37689
+自己编的：哈哈
+我觉得在遍历vector的时候，还是应该学会用迭代器比较好，再改改。
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+
+
+using namespace std;
+
+int main(){
+    
+    int n;
+    while(cin>>n){
+        vector<int> arr;
+        while(n){
+            int m;
+            m=n%10;
+           
+            arr.push_back(m);
+            for(int i=0;i<arr.size()-1;i++){
+                if(m==arr[i])
+                    arr.pop_back();
+              
+                    //break;
+                //if(m!=arr[i]&&i==arr.size()-1)
+                //arr.push_back(m);
+            } 
+            
+            n=n/10;
+        }
+        int num=0;
+        for(int i=0;i<arr.size();i++){
+            
+            num=num*10+arr[i];
+        }
+        
+        cout<<num<<endl;
+        
+        
+    }
+    
+    return 0;
+}
+
+解法二：
+还是利用了hash表的原理，比我的简洁，多学习
+
+链接：https://www.nowcoder.com/questionTerminal/253986e66d114d378ae8de2e6c4577c1
+来源：牛客网
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n;
+    int a[10]={0};
+    int num=0;
+    cin>>n ;
+    while(n)
+    {
+        if(a[n%10]==0)
+        {
+            a[n%10]++;//这一步是更新，遇到下次相同的数会跳过
+            num=num*10+n%10;
+        }
+        n/=10;
+    }
+     
+    cout<<num<<endl;
+     
+    return 0;
+}
+
