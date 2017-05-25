@@ -1,0 +1,31 @@
+//这个题的思路很简单，也很容易实现。可以使用强制类型转换运算来实现向下取整或者向上取整，注意一个细节：强制类型转换运算是一种严格取整运算，它的原则不是四舍五入，对于小数，最后的返回都会是整数部分，在C语言中强制类型转换是用括号加类型符如（int）a，标准C++的强制类型转换是static_cast<int>(a);
+
+链接：https://www.nowcoder.com/questionTerminal/3ab09737afb645cc82c35d56a5ce802a
+来源：牛客网
+#include<iostream>
+using namespace std;
+int main()
+{
+    float Input_Number;
+    while(cin>>Input_Number)
+    {
+        if(Input_Number-static_cast<int>(Input_Number)>=0.5)
+            cout<<static_cast<int>(Input_Number)+1<<endl;
+        else
+            cout<<static_cast<int>(Input_Number)<<endl;
+    }
+    return 0;
+}
+解法二：
+链接：https://www.nowcoder.com/questionTerminal/3ab09737afb645cc82c35d56a5ce802a
+来源：牛客网
+#include <iostream> 
+using namespace std; 
+int main() 
+{ 
+float a; 
+cin>>a; 
+cout<<int(a+0.5); 
+return 0; 
+}
+
