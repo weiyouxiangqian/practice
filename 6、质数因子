@@ -1,0 +1,88 @@
+题目描述
+功能:输入一个正整数，按照从小到大的顺序输出它的所有质数的因子（如180的质数因子为2 2 3 3 5 ）
+最后一个数后面也要有空格
+
+详细描述：
+
+函数接口说明：
+public String getResult(long ulDataInput)
+输入参数：
+long ulDataInput：输入的正整数
+返回值：
+String
+
+
+
+输入描述:
+输入一个long型整数
+
+输出描述:
+按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。
+
+输入例子:
+180
+
+输出例子:
+2 2 3 3 5
+链接：https://www.nowcoder.com/questionTerminal/196534628ca6490ebce2e336b47b3607
+来源：牛客网
+#include <iostream>
+#include <math.h>
+using namespace std;
+ 
+int main()
+{
+    long int input;
+ 
+    //方法一
+    //while (cin >> input)
+    //{
+    //  while (input != 1)
+    //  {
+    //      for (int i = 2; i <= input; i++)
+    //      {
+    //          if (input % i == 0)
+    //          {
+    //              input /= i;
+    //              cout << i << ' ';
+    //              break;  //只要能被i整除，i总是从2开始
+    //          }
+    //      }
+    //  }
+ 
+    //}
+ 
+    //方法二
+    //while (cin >> input)
+    //{
+    //  for (int i = 2; i <= input; i++)
+    //  {
+    //      //只要能被i整除，i总是从2开始
+    //      if (input%i == 0)
+    //      {
+    //          input /= i;
+    //          cout << i << " ";
+    //          i = 1;//经i++之后 i又变为2开始
+    //      }
+    //  }
+    //}
+ 
+    //方法三
+    while (cin >> input)
+    {
+        for (int a = 2; a<= sqrt(input); a++)
+        {
+            //此处是while,把a整除结束才可加1
+            while (input%a == 0)
+            {
+                cout << a << ' ';
+                input = input / a;
+            }
+        }
+        if (input>1) cout << input << ' ';
+    }
+ 
+    //system("pause");
+    return 0;
+}
+
