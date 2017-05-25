@@ -1,0 +1,49 @@
+题目描述
+编写一个函数，计算字符串中含有的不同字符的个数。字符在ACSII码范围内(0~127)。不在范围内的不作统计。
+
+输入描述:
+输入N个字符，字符在ACSII码范围内。
+
+输出描述:
+输出范围在(0~127)字符的个数。
+
+输入例子:
+abc
+
+输出例子:
+3
+
+自己一次性编写通过 哈哈 我觉得我的算法很好，当然也是借鉴了上一题中的去重策略，
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+
+
+using namespace std;
+
+int main(){
+    
+    string str;
+    while(cin>>str){
+        int count=0;
+        int a[128]={0};
+        for(int i=0;i<str.size();i++){
+            //if(a[]str[i]>=0&&str[i]<=127)
+            if(a[str[i]]==0){
+                a[str[i]]++;
+                count++;//找到没重复的，更新状态，同时操作（比如计数，求和等）
+            }
+            //a[str[i]]=1;
+                
+        }
+        cout<<count<<endl;
+        
+        
+        
+        
+    }
+    
+    return 0;
+}
