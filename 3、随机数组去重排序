@@ -1,0 +1,135 @@
+题目描述
+明明想在学校中请一些同学一起做一项问卷调查，为了实验的客观性，他先用计算机生成了N个1到1000之间的随机整数（N≤1000），对于其中重复的数字，只保留一个，把其余相同的数去掉，不同的数对应着不同的学生的学号。然后再把这些数从小到大排序，按照排好的顺序去找同学做调查。请你协助明明完成“去重”与“排序”的工作。
+ 
+ 
+Input Param 
+     n               输入随机数的个数     
+ inputArray      n个随机整数组成的数组 
+     
+Return Value
+     OutputArray    输出处理后的随机整数
+ 
+
+注：测试用例保证输入参数的正确性，答题者无需验证。测试用例不止一组。
+
+ 
+ 
+
+输入描述:
+输入多行，先输入随机整数的个数，再输入相应个数的整数
+
+解法一：自己编的
+//用了vector，然后用hash表去重
+#include<iostream>
+#include <vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+	int n, iA;
+	
+	//cin >> n;
+	while (cin >> n)
+	{
+		vector<int> inputArray;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> iA;
+			inputArray.push_back(iA);
+
+			
+		}
+        int a[1000] = { 0 };
+		
+			for (int i = 0; i < inputArray.size(); i++)
+			{
+				a[inputArray[i]] = 1;
+				
+			}
+        /*
+        vector<int>::iterator it;
+        for (it = inputArray.begin(); it != inputArray.end(); it++)
+			{
+				a[*it] = 1;
+				
+			}
+            */
+
+		for (int j = 0; j < 1000; j++){
+			if (a[j] == 1)
+			{
+				cout << j << endl;
+			}
+			
+			}		
+		
+	}
+   return 0; 
+    
+}
+
+解法二
+
+//用set容器，二叉树，红黑树，可以直接去重排序
+#include<iostream>
+
+#include<set>
+
+
+using namespace std;
+
+
+int main(){
+	
+int loop = 0;
+	
+while (cin >> loop)                   //看题目，set容器
+	
+{
+		int a[1000], tem, i = 0;
+
+		for (int i = 0; i < loop; i++) cin >> a[i];
+
+		set<int> num(a, a + loop);
+
+		for (set<int>::iterator it = num.begin(); it != num.end(); it++)
+{
+			cout << *it << endl;
+		
+}
+	
+}
+	
+return 0;
+
+
+}
+
+解法三
+
+学号一到一千，随机数还不超过一千，去重，排序，我去，，，
+怎么这么熟悉，这不是桶排序么！！！
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int nums; // 表示随机数个数
+     
+    while (cin >> nums)
+{ vector<int> id(1001, 0); 
+int tmp; 
+for (int i = 1; i <= nums; i++)
+        {
+            cin >> tmp; 
+id[tmp]++;
+        }
+        for (int j = 1; j < id.size(); j++)
+            if (id[j]>0) cout << j << endl;
+ 
+    }
+ 
+    return 0;
+}
+
